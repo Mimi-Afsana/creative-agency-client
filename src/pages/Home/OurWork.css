@@ -1,0 +1,26 @@
+.our-work {
+  height: 624px;
+  background-color: #111430;
+}
+.our-work img {
+  width: 890px;
+  height: 384px;
+}
+
+@media screen and (max-width: 576px) {
+  .our-work {
+    width: 90%;
+    height: 380px;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: #111430;
+  }
+  .our-work img {
+    height: 184px;
+  }
+  .mimi {
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+  }
+}

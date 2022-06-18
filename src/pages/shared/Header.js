@@ -3,30 +3,19 @@ import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "@firebase/auth";
-import frame from "../../images/logos/Frame.png";
 import "./Header.css";
-const Header = () => {
+const Header = ({ accessToken }) => {
   const [user, loading, error] = useAuthState(auth);
   const logout = () => {
     signOut(auth);
+    localStorage.removeItem("accessToken");
   };
   const menuItems = (
     <>
       <li className="pl-32">
         <Link to="/home">Home</Link>
       </li>
-      <li>
-        <Link to="/appoinment">Appoinment</Link>
-      </li>
-      <li>
-        <Link to="/review">Review</Link>
-      </li>
-      <li>
-        <Link to="/contact">Contact</Link>
-      </li>
-      <li>
-        <Link to="/about">About</Link>
-      </li>
+
       {user && (
         <li>
           <Link to="/dashboard">Dashboard</Link>
@@ -43,7 +32,7 @@ const Header = () => {
   );
 
   return (
-    <div className="bg-color">
+    <div className="bg-color mx-auto">
       <div className="navbar max-w-6xl mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -70,7 +59,9 @@ const Header = () => {
               {menuItems}
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl pl-6">Creative Agency</a>
+          <a className="btn btn-ghost normal-case text-xl pl-6">
+            Creative Agency
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex pl-96">
           <ul className="menu menu-horizontal p-0">{menuItems}</ul>
@@ -96,15 +87,6 @@ const Header = () => {
               />
             </svg>
           </label>
-        </div>
-      </div>
-      <div class="card lg:card-side max-w-6xl mx-auto pb-10">
-        <div class="card-body pr-32">
-          <h2 class="card-title">New album is released!</h2>
-          <p>Click the button to listen on Spotiwhy app.</p>
-        </div>
-        <div className="">
-          <img src={frame} alt="Album" width="624px" height="412px" />
         </div>
       </div>
     </div>

@@ -1,0 +1,10 @@
+.footer-color {
+  background-color: #fbd062;
+  /* height: 500px; */
+}
+
+@media screen and (max-width: 576px) {
+  .footer-color {
+    height: 640px;
+  }
+}

@@ -2,9 +2,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
 import auth from "../firebase.init";
+import useAdmin from "../hooks/useAdmin";
 
 const DashBoard = () => {
   const [user] = useAuthState(auth);
+  const [admin] = useAdmin(user);
 
   return (
     <div className="drawer drawer-mobile">
@@ -42,14 +44,16 @@ const DashBoard = () => {
               </Link>
             </li>
 
-            <li>
-              <Link
-                to="/dashboard/alluser"
-                className="text-purple-500 font-bold"
-              >
-                All Users
-              </Link>
-            </li>
+            {admin && (
+              <li>
+                <Link
+                  to="/dashboard/alluser"
+                  className="text-purple-500 font-bold"
+                >
+                  All Users
+                </Link>
+              </li>
+            )}
 
             <li>
               <Link
@@ -59,30 +63,37 @@ const DashBoard = () => {
                 Service List
               </Link>
             </li>
-            <li>
-              <Link
-                to="/dashboard/addnewitem"
-                className="text-purple-500 font-bold"
-              >
-                Add A Product
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/dashboard/myprofile"
-                className="text-purple-500 font-bold"
-              >
-                My Profile
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/dashboard/alluser"
-                className="font-bold text-purple-500 "
-              >
-                Make Admin
-              </Link>
-            </li>
+
+            {admin && (
+              <li>
+                <Link
+                  to="/dashboard/addnewitem"
+                  className="text-purple-500 font-bold"
+                >
+                  Add A Product
+                </Link>
+              </li>
+            )}
+            {admin && (
+              <li>
+                <Link
+                  to="/dashboard/allserviceList"
+                  className="text-purple-500 font-bold"
+                >
+                  All Service List
+                </Link>
+              </li>
+            )}
+            {admin && (
+              <li>
+                <Link
+                  to="/dashboard/admin"
+                  className="font-bold text-purple-500 "
+                >
+                  Make Admin
+                </Link>
+              </li>
+            )}
           </>
         </ul>
       </div>

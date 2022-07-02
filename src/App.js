@@ -17,6 +17,10 @@ import "react-toastify/dist/ReactToastify.css";
 import AllServiceList from "./DashBoard/AllServiceList";
 import Allusers from "./DashBoard/Allusers";
 import OrderServiceList from "./DashBoard/OrderServiceList";
+import AllServiceListAdmin from "./DashBoard/AllServiceListAdmin";
+import MakeAdmin from "./DashBoard/MakeAdmin";
+import RequireAdmin from "./DashBoard/RequireAdmin";
+import Payment from "./DashBoard/Payment";
 
 function App() {
   return (
@@ -33,13 +37,33 @@ function App() {
           <Route path="order" element={<Orders></Orders>}></Route>
           <Route path="order/:Id" element={<Orders></Orders>}></Route>
           <Route path="review" element={<AddReview></AddReview>}></Route>
-          <Route path="orderservice" element={<OrderServiceList></OrderServiceList>}></Route>
-          <Route path="serviceList" element={<ServiceList></ServiceList>}></Route>
+          <Route
+            path="orderservice"
+            element={<OrderServiceList></OrderServiceList>}
+          ></Route>
+          {/* <Route
+            path="orderservice/:id"
+            element={<OrderServiceList></OrderServiceList>}
+          ></Route> */}
+          <Route
+            path="serviceList"
+            element={<ServiceList></ServiceList>}
+          ></Route>
+          <Route
+            path="allserviceList"
+            element={<AllServiceListAdmin></AllServiceListAdmin>}
+          ></Route>
           <Route path="alluser" element={<Allusers></Allusers>}></Route>
           <Route
-            path="addnewitem"
-            element={<AddProduct></AddProduct>}
-          ></Route>{" "}
+            path="admin"
+            element={
+              <RequireAdmin>
+                <MakeAdmin></MakeAdmin>
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route path="addnewitem" element={<AddProduct></AddProduct>}></Route>{" "}
+          <Route path="payment/:id" element={<Payment></Payment>}></Route>
         </Route>
       </Routes>
       <ToastContainer />

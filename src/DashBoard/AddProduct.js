@@ -14,11 +14,12 @@ const AddProduct = () => {
   if (loading) {
     return <p>fgggh....</p>;
   }
-  const addProduct = async (event) => {
+  const addProducts = async (event) => {
     event.preventDefault();
     const email = user.email;
-    const image = event.target.img.value;
-    const name = event.target.itemname.value;
+    const image = event.target.image.value;
+    const name = event.target.name?.value;
+    const service = event.target.service?.value;
     const description = event.target.description.value;
     const price = event.target.price.value;
 
@@ -32,24 +33,26 @@ const AddProduct = () => {
     // console.log(addProduct);
     const url = `http://localhost:5000/addItem`;
     const { data } = await axios.post(url, addProduct, {
-      // headers: {
-      //   authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      // },
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      
     });
+    console.log(data)
     toast.success("Product added Successfully");
     event.target.reset();
   };
   return (
     <div>
       <h3 className="text-xl lg:pl-96 lg:ml-28 lg:mt-16">Add Product</h3>
-      <form onSubmit={addProduct}>
+      <form onSubmit={addProducts}>
         <div class=" sm:mt-5">
           <div class="hero-content flex-col lg:flex-row-reverse">
             <div class="card flex-shrink-0 w-full max-w-sm">
               <div class="card-body">
                 <div class="form-control"></div>
+                
                 <div class="form-control">
-                 
                   <input
                     name="email"
                     type="email"
@@ -60,9 +63,11 @@ const AddProduct = () => {
                   />
                 </div>
                 <div class="form-control">
-                <label htmlFor="" className='font-bold mb-2'>Product Title</label>
+                  <label htmlFor="" className="font-bold mb-2">
+                    Product Title
+                  </label>
                   <input
-                    name="serviceName"
+                    name="name"
                     type="text"
                     placeholder="Enter Title"
                     class="input input-bordered"
@@ -70,7 +75,9 @@ const AddProduct = () => {
                 </div>
                 <div className="flex">
                   <div class="">
-                  <label htmlFor="" className='font-bold mb-2'>Price</label>
+                    <label htmlFor="" className="font-bold mb-2">
+                      Price
+                    </label>
                     <input
                       name="price"
                       type="number"
@@ -79,7 +86,9 @@ const AddProduct = () => {
                     />
                   </div>
                   <div class="">
-                  <label htmlFor="" className='font-bold mb-2'>Image</label>
+                    <label htmlFor="" className="font-bold mb-2">
+                      Image
+                    </label>
                     <input
                       name="image"
                       type="text"
@@ -89,7 +98,9 @@ const AddProduct = () => {
                   </div>
                 </div>
                 <div class="form-control">
-                <label htmlFor="" className='font-bold mb-2'>Product Description</label>
+                  <label htmlFor="" className="font-bold mb-2">
+                    Product Description
+                  </label>
                   <textarea
                     className=" pl-2 border"
                     name="description"

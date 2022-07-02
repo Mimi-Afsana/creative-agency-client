@@ -28,6 +28,13 @@ const Header = ({ accessToken }) => {
           <Link to="/login">Login</Link>
         )}
       </li>
+      <li>
+        {user ? (
+          <button>{user?.displayName}</button>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
+      </li>
     </>
   );
 

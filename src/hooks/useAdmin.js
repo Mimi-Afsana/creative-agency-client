@@ -1,13 +1,12 @@
-
 import React, { useEffect, useState } from "react";
 
 const useAdmin = (user) => {
   const [admin, setAdmin] = useState(false);
-  const [adLoading, setAdLoading] = useState(true);
+  const [adminLoading, setAdLoading] = useState(true);
   useEffect(() => {
     const email = user?.email;
     if (email) {
-      fetch(`http://localhost:5000/${email}`, {
+      fetch(`http://localhost:5000/admin/${email}`, {
         method: "GET",
         headers: {
           "content-type": "application/json",
@@ -21,7 +20,7 @@ const useAdmin = (user) => {
         });
     }
   }, [user]);
-  return [admin, adLoading];
+  return [admin, adminLoading];
 };
 
 export default useAdmin;
